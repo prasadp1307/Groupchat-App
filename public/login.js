@@ -1,11 +1,35 @@
-const container = document.getElementById('container');
-const registerBtn = document.getElementById('register');
-const loginBtn = document.getElementById('login');
+const loginForm = document.querySelector('.loginForm');
+const email = document.querySelector('#email');
+const password = document.querySelector('#password');
 
-registerBtn.addEventListener('click', () => {
-    container.classList.add("active");
-});
-
-loginBtn.addEventListener('click', () => {
-    container.classList.remove("active");
-});
+// login data submission
+loginForm.addEventListener('submit', loginSubmit);
+async function loginSubmit(e) {
+    e.preventDefault();
+    try {
+        const loginSubmitedData = await axios.post(`http://localhost:3000/user/login`, {
+            email: email.value,
+            password: password.value
+        });
+        // console.log(loginSubmitedData.data);
+        localStorage.setItem('token', loginSubmitedData.data.token);
+        if (!alert(loginSubmitedData.data.message)) {
+            window.location.href = '/group';
+        }
+    }
+    catch (err) {
+        if (err.response.status === 404) {
+            if (!alert(err.response.data.message)) {
+                location.reload();
+            }
+        }
+        else if (err.response.status === 401) {
+            if (!alert(err.response.data.message)) {
+                location.reload();
+            }
+        }
+        else {
+            console.log(err);
+        }
+    }
+}
