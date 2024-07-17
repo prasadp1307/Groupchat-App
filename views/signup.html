@@ -8,7 +8,7 @@
 </head>
 <body>
     <section>
-        <form>
+        <form class="signupForm">
             <h1>SignUp</h1>
             <div class="inputbox">
                 <ion-icon name="mail-outline"></ion-icon>
@@ -20,7 +20,7 @@
                 <input type="phone" id="phone" required>
                 <label for="phone">Mobile Number</label>
             </div>
-                <div class="inputbox">
+            <div class="inputbox">
                 <ion-icon name="mail-outline"></ion-icon>
                 <input type="email" id="email" required>
                 <label for="email">Email</label>
@@ -32,21 +32,22 @@
             </div>
             <div class="inputbox">
                 <ion-icon name="lock-closed-outline"></ion-icon>
-                <input type="password" id="password" required>
-                <label for="password">Confirm Password</label>
+                <input type="password" id="confirm-password" required>
+                <label for="confirm-password">Confirm Password</label>
             </div>
             <div class="forget">
                 <label>
                     <input type="checkbox"> Remember Me
                 </label>
-               </div>
+            </div>
             <button type="submit">SignUp</button>
             <div class="register">
                 <p>Have an account? <a href="login.html">Login</a></p>
             </div>
-    
         </form>
     </section>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="../public/signup.js"></script>
     <script type="module" src="https://cdn.jsdelivr.net/npm/@ionic/core/dist/ionic/ionic.esm.js"></script>
     <script nomodule src="https://cdn.jsdelivr.net/npm/@ionic/core/dist/ionic/ionic.js"></script>
 </body>
