@@ -4,8 +4,9 @@ const bodyparser = require('body-parser');
 const cors = require('cors');
 const path = require('path');
 const dotenv = require('dotenv').config();
-
+const jwt = require('jsonwebtoken');
 const app = express();
+
 
 // Middleware setup
 app.use(cors());
