@@ -5,12 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ChatApp</title>
     <link rel="stylesheet" href="chat.css">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.socket.io/4.0.0/socket.io.min.js"></script>
 </head>
 <body>
     <div class="chat-container">
         <div class="chat-header">
             <img src="logo.png" alt="ChatApp Logo" class="logo">
-         </div>
+        </div>
         <div class="chat-messages" id="chat-messages"></div>
         <div class="chat-input">
             <input type="text" id="message-input" placeholder="Type a message..." autocomplete="off">

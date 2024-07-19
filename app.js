@@ -5,11 +5,14 @@ const cors = require('cors');
 const path = require('path');
 const dotenv = require('dotenv').config();
 const jwt = require('jsonwebtoken');
+
 const app = express();
+const server = require('http').createServer(app);
 
 
 // Middleware setup
 app.use(cors());
+
 app.use(bodyparser.json());
 app.use(express.json());
 
@@ -21,6 +24,20 @@ const sequelize = require('./util/database');
 const userRoutes = require('./routes/userRoutes');
 const chatRoutes = require('./routes/chatRoutes');
 // const pageRoutes = require('./routes/pageRoutes');
+
+
+// Authenticaton of WebSocket Connection request
+// io.use(websocketAuth);
+
+// socket.io all event listeners and actions
+// io.on('connection', connectionListener);
+
+// // HTTP API Routing
+// app.use((req, res, next) => {
+//     req.io = io;
+//     console.log(req.url);
+//     next();
+// })
 
 
 // Routes
@@ -40,6 +57,16 @@ app.get('/', (req, res) => {
 // DB associations
 User.hasMany(Message);
 Message.belongsTo(User);
+
+User.hasMany(Message, { foreignKey: 'userId' });
+Message.belongsTo(User, { foreignKey: 'userId' });
+
+
+
+
+
+
+
 
 // Database & Server start
 sequelize
