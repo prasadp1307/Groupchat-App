@@ -9,6 +9,14 @@
     <script src="https://cdn.socket.io/4.0.0/socket.io.min.js"></script>
 </head>
 <body>
+    <div class="navbar">
+        <div class="navbar-content">
+            <button id="logout-button">
+               Logout
+            </button>
+            <span>Chatzz!com</span>
+        </div>
+    </div>
     <div class="chat-container">
         <div class="chat-header">
             <img src="logo.png" alt="ChatApp Logo" class="logo">
@@ -19,7 +27,17 @@
             <button id="send-button">Send</button>
         </div>
     </div>
-
+    <!-- <div class="chat-footer">
+        &copy; 2024 ChatApp. All rights reserved.
+    </div> -->
     <script src="../public/chat.js"></script>
+    <script>
+        document.getElementById('logout-button').addEventListener('click', () => {
+            // Clear the token from localStorage (optional)
+            localStorage.removeItem('token');
+            // Redirect to the login page
+            window.location.href = 'login.html';
+        });
+    </script>
 </body>
 </html>

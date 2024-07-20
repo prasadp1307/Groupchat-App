@@ -3,38 +3,31 @@ document.addEventListener('DOMContentLoaded', () => {
     const email = document.querySelector('#email');
     const password = document.querySelector('#password');
 
-    // login data submission
-    loginForm.addEventListener('submit', loginSubmit);
-    async function loginSubmit(e) {
+    loginForm.addEventListener('submit', async (e) => {
         e.preventDefault();
 
-        // Check if email is valid
         if (!email.value.includes('@')) {
             alert('Please enter a valid email address.');
             return;
         }
 
-        // Check if password is provided
         if (password.value.length < 4 || password.value.length > 8) {
             alert('Password must be between 4 to 8 characters long.');
             return;
         }
 
         try {
-            const loginSubmitedData = await axios.post(`http://localhost:4000/user/login`, {
+            const response = await axios.post('http://localhost:4000/user/login', {
                 email: email.value,
                 password: password.value
             });
 
-            // Store token in local storage
-            localStorage.setItem('token', loginSubmitedData.data.token);
+            // Ensure username is set in localStorage
+            localStorage.setItem('token', response.data.token);
+            localStorage.setItem('username', response.data.username); 
 
-            // Alert success message and redirect
-            if (!alert(loginSubmitedData.data.message)) {
-                window.location.href = "./chat.html";
-            }
+            window.location.href = './chat.html'; // Redirect to chat page
         } catch (err) {
-            // Check for specific error responses
             if (err.response) {
                 if (err.response.status === 404) {
                     alert('User not found. Please check your email and try again.');
@@ -44,8 +37,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     alert('An error occurred. Please try again later.');
                 }
             } else {
-                console.log(err);
+                console.error(err);
             }
         }
-    }
+    });
 });

@@ -1,3 +1,4 @@
+/* Body styling */
 body {
     font-family: sans-serif;
     display: flex;
@@ -9,19 +10,46 @@ body {
     background-color: #f0f0f0;
 }
 
+/* Navbar styling */
+.navbar {
+    background-color: #4d0282; /* Match header background color */
+    color: #fff;
+    width: 100%;
+    padding: 10px 20px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1000; /* Ensure it is above other elements */
+}
+
+.navbar-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.navbar-content span {
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+/* Chat container styling */
 .chat-container {
     display: flex;
     flex-direction: column;
     width: 400px;
-    height: 600px;
+    height: calc(100vh - 60px); /* Adjust height based on navbar and footer */
     background-color: #fff;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     overflow: hidden;
+    margin-top: 60px; /* Adjust based on navbar height */
 }
 
+/* Header styling */
 .chat-header {
-    background-color: #820bd6;
+    background-color: #4d0282;
     color: #fff;
     padding: 10px;
     text-align: center;
@@ -35,6 +63,7 @@ body {
     margin-right: 10px;
 }
 
+/* Messages styling */
 .chat-messages {
     flex: 1;
     padding: 10px;
@@ -44,6 +73,8 @@ body {
 
 .chat-messages .message {
     margin: 10px 0;
+    display: flex;
+    align-items: center;
 }
 
 .chat-messages .message .username {
@@ -51,6 +82,29 @@ body {
     margin-right: 5px;
 }
 
+.chat-messages .message.sender {
+    justify-content: flex-end;
+    text-align: right;
+}
+
+.chat-messages .message.sender .message-content {
+    background-color: #e0e0e0;
+    border-radius: 8px;
+    padding: 10px;
+}
+
+.chat-messages .message.receiver {
+    justify-content: flex-start;
+    text-align: left;
+}
+
+.chat-messages .message.receiver .message-content {
+    background-color: #d0f0c0;
+    border-radius: 8px;
+    padding: 10px;
+}
+
+/* Input area styling */
 .chat-input {
     display: flex;
     padding: 10px;
@@ -76,4 +130,12 @@ body {
 
 .chat-input button:hover {
     background-color: #8101e3;
+}
+
+/* Footer styling */
+.chat-footer {
+    background-color: #f1f1f1;
+    padding: 10px;
+    text-align: center;
+    border-top: 1px solid #ddd;
 }
