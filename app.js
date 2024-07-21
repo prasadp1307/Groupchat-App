@@ -23,6 +23,7 @@ app.use('/public', express.static(path.join(__dirname, 'public')));
 const sequelize = require('./util/database');
 const userRoutes = require('./routes/userRoutes');
 const chatRoutes = require('./routes/chatRoutes');
+const groupRoutes = require('./routes/groupRoutes');
 // const pageRoutes = require('./routes/pageRoutes');
 
 
@@ -43,11 +44,14 @@ const chatRoutes = require('./routes/chatRoutes');
 // Routes
 app.use('/user', userRoutes);
 app.use('/chat', chatRoutes);
+app.use('/group',groupRoutes);
 // app.use('/',pageRoutes);
 
 // Models
 const User = require('./models/users');
 const Message = require('./models/message');
+const Member = require('./models/member');
+const Group = require('./models/group');
 
 // Serve the signup.html file
 app.get('/', (req, res) => {
@@ -60,6 +64,14 @@ Message.belongsTo(User);
 
 User.hasMany(Message, { foreignKey: 'userId' });
 Message.belongsTo(User, { foreignKey: 'userId' });
+
+
+Group.hasMany(Member, { foreignKey: 'groupId' });
+Member.belongsTo(Group, { foreignKey: 'groupId' });
+
+User.hasMany(Member, { foreignKey: 'userId' });
+Member.belongsTo(User, { foreignKey: 'userId' });
+
 
 
 

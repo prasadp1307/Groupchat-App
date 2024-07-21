@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Group Chat App</title>
+    <link rel="stylesheet" href="./group.css">
+</head>
+
+<body>
+    <header>
+        <div class="head-container">
+            <div class="logo">
+                <img src="logo.png" alt="ChatApp Logo">
+                <span>Even without meeting, stay Connected...</span>
+            </div>
+            <div class="button-container">
+                <button class="header-button" id="home-button">Home</button>
+                <button class="header-button" id="create-group-button">Create Group</button>
+                <button class="header-button" id="logout-button">Log Out</button>
+            </div>
+        </div>
+    </header>
+    <main>
+        <!-- Left sidebar -->
+        <div class="left-sidebar show-group-list">
+            <div class="groupLists">
+                <div class="joinedGroups" style="cursor:pointer;"></div>
+            </div>
+        </div>
+
+        <!-- Right sidebar -->
+        <div class="right-sidebar activity-area">
+            <!-- new group create form -->
+            <div class="newGroup"></div>
+
+            <!-- view active group -->
+            <div class="groupDetails">
+                <div class="groupName"></div>
+                <div class="groupMembersCount" style="cursor:pointer;"></div>
+                <div class="groupLink"></div>
+            </div>
+
+            <!-- members list -->
+            <div class="members" style="cursor:pointer;">
+                <div class="member">
+                    <button class="closeMember" style="display: none;">Close</button>
+                    <form class="memberSearch" style="display: none;">
+                        <input type="text" name="findMember" id="findMember" required>
+                        <input type="submit" value="Search">
+                    </form>
+                    <div class="memberSearchResult"></div>
+                    <div class="owner-div"></div>
+                    <div class="admin-div"></div>
+                    <div class="member-div"></div>
+                </div>
+            </div>
+
+            <!-- show messages -->
+            <div class="showMessage"></div>
+
+            <form class="chatForm groupForm" style="display: none;" enctype="multipart/form-data">
+                <label for="message">Message:</label>
+                <input type="text" name="message" id="message">
+                <input type="file" id="uploadFile" name="uploadFile" multiple="true" accept="image/*">
+                <input type="submit" value="Send" id="sendBtn">
+            </form>
+        </div>
+    </main>
+
+    <!-- Script imports -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.6.2/axios.min.js"></script>
+    <!-- <script src="../public/creategroup.js"></script> -->
+    <script src="../public/group.js"></script>
+    <script src="../public/joingroup.js"></script>
+    <script>
+        document.getElementById('home-button').addEventListener('click', () => {
+            window.location.href = 'chat.html';
+        });
+
+        document.getElementById('create-group-button').addEventListener('click', () => {
+            // Logic to show the Create Group form or navigate to the create group page
+            document.querySelector('.newGroup').innerHTML = `
+                <div>
+                    <form class="createForm">
+                        <label for="groupName">Group Name:</label>
+                        <input type="text" name="groupName" id="groupName" required>
+                        <input type="submit" value="Create Group" id="sendBtn">
+                    </form>
+                    <button class="cancelBtn">Cancel</button>
+                </div>
+            `;
+        });
+
+        document.getElementById('logout-button').addEventListener('click', () => {
+            localStorage.removeItem('token');
+            window.location.href = 'login.html';
+        });
+    </script>
+</body>
+
+</html>

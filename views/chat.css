@@ -25,7 +25,7 @@ body {
 
 .navbar-content {
     display: flex;
-    justify-content: center;
+    justify-content: space-between; /* Space between elements */
     align-items: center;
 }
 
@@ -34,12 +34,56 @@ body {
     font-weight: bold;
 }
 
+/* Tagline styling */
+.navbar-content span.tagline {
+    font-size: 1em;
+    font-family: cursive;
+    /* font-style: italic; */
+    color: #fcfcfc; 
+    margin-left: 20px; /* Add some spacing from the logo or other content */
+    font-weight: 300; /* Light font weight */
+}
+
+/* Media query for responsiveness */
+@media (max-width: 600px) {
+    .navbar-content span.tagline {
+        font-size: 1em; /* Slightly smaller font size on smaller screens */
+        margin-left: 10px; /* Adjust margin for smaller screens */
+    }
+}
+
+/* Button styling */
+button#logout-button,
+button#create-group-button {
+    background-color: #8e02f3;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 20px;
+    border-color: rgb(251, 249, 242);
+    font-family: sans-serif;
+    cursor: pointer;
+    
+    transition: background-color 0.3s ease; 
+}
+button#logout-button {
+    margin-right: 8rem;
+}
+button#create-group-button {
+    margin-left: 8rem;
+}
+
+button#logout-button:hover,
+button#create-group-button:hover {
+    background-color: #8201c2;
+}
+
 /* Chat container styling */
 .chat-container {
     display: flex;
     flex-direction: column;
     width: 400px;
-    height: calc(100vh - 60px); /* Adjust height based on navbar and footer */
+    height: calc(100vh - 60px); /* Adjust height based on navbar */
     background-color: #fff;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);

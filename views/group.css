@@ -1,0 +1,248 @@
+/* Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background-color: #f4f4f4;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+/* Header styling */
+header {
+    background-color: #007bff;
+    padding: 10px 20px;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.head-container {
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+.head-container .logo {
+    display: flex;
+    align-items: center;
+    flex: 1;
+}
+
+.head-container .logo img {
+    height: 40px;
+    margin-right: 10px;
+}
+
+.head-container .logo span {
+    font-size: 14px;
+    font-weight: bold;
+    font-family: cursive;
+    font-style: oblique;
+    color: black;
+}
+
+.button-container {
+    display: flex;
+    gap: 10px;
+}
+
+button.header-button {
+    background-color: #28a745;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+button.header-button:hover {
+    background-color: #218838;
+}
+
+/* Main area styling */
+main {
+    display: flex;
+    flex: 1;
+    height: calc(100vh - 60px); /* Adjust based on header height */
+}
+
+/* Left sidebar styling */
+.left-sidebar {
+    background-color: #343a40;
+    color: white;
+    width: 250px;
+    padding: 20px;
+    overflow-y: auto;
+}
+
+.left-sidebar .groupLists {
+    margin-top: 20px;
+}
+
+.left-sidebar .groupLists .joinedGroups {
+    background-color: #495057;
+    padding: 10px;
+    border-radius: 4px;
+    margin-bottom: 10px;
+}
+
+.left-sidebar .groupLists .joinedGroups:hover {
+    background-color: #6c757d;
+}
+
+/* Right sidebar styling */
+.right-sidebar {
+    flex: 1;
+    background-color: #fff;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+}
+
+.newGroup, .groupDetails, .showMessage {
+    margin-bottom: 20px;
+}
+
+.groupDetails .groupName {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.groupDetails .groupMembersCount {
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+.groupDetails .groupLink {
+    font-size: 14px;
+    color: #007bff;
+    word-wrap: break-word;
+}
+
+.members {
+    background-color: #f8f9fa;
+    padding: 10px;
+    border-radius: 4px;
+    margin-bottom: 20px;
+}
+
+.members .member {
+    margin-bottom: 10px;
+}
+
+.members .closeMember {
+    background-color: #dc3545;
+    color: white;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.members .closeMember:hover {
+    background-color: #c82333;
+}
+
+.members .memberSearch {
+    display: flex;
+    margin-bottom: 10px;
+}
+
+.members .memberSearch input[type="text"] {
+    flex: 1;
+    padding: 5px;
+    margin-right: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.members .memberSearch input[type="submit"] {
+    padding: 5px 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.members .memberSearch input[type="submit"]:hover {
+    background-color: #0056b3;
+}
+
+.members .memberSearchResult, .owner-div, .admin-div, .member-div {
+    margin-bottom: 10px;
+}
+
+/* Chat messages styling */
+.showMessage {
+    flex: 1;
+    background-color: #e9ecef;
+    padding: 20px;
+    border-radius: 4px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.showMessage .message {
+    margin-bottom: 10px;
+    padding: 10px;
+    border-radius: 4px;
+    max-width: 70%;
+}
+
+.showMessage .sender {
+    background-color: #dcf8c6;
+    align-self: flex-end;
+}
+
+.showMessage .receiver {
+    background-color: #fff;
+    align-self: flex-start;
+}
+
+.showMessage .username {
+    font-weight: bold;
+}
+
+/* Chat form styling */
+.chatForm {
+    display: flex;
+    align-items: center;
+}
+
+.chatForm input[type="text"] {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-right: 10px;
+}
+
+.chatForm input[type="file"] {
+    margin-right: 10px;
+}
+
+.chatForm input[type="submit"] {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.chatForm input[type="submit"]:hover {
+    background-color: #0056b3;
+}

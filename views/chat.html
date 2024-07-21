@@ -10,12 +10,11 @@
 </head>
 <body>
     <div class="navbar">
-        <div class="navbar-content">
-            <button id="logout-button">
-               Logout
-            </button>
-            <span>Chatzz!com</span>
-        </div>
+        <div class="navbar-content">                      
+            <button id="create-group-button">Group</button> 
+            <span class="tagline">Even without meeting,stay Connected...</span>
+            <button id="logout-button">Logout</button>
+                    </div>
     </div>
     <div class="chat-container">
         <div class="chat-header">
@@ -37,6 +36,17 @@
             localStorage.removeItem('token');
             // Redirect to the login page
             window.location.href = 'login.html';
+        });
+
+        document.getElementById('create-group-button').addEventListener('click', () => {
+            // Show a prompt to enter the group name
+            // const groupName = prompt("Enter the group name:");
+            // if (groupName) {
+            //     // Store the group name in localStorage or send it to the server
+            //     localStorage.setItem('groupName', groupName);
+                // Redirect to the group.html page
+                window.location.href = 'group.html';
+            // }
         });
     </script>
 </body>
