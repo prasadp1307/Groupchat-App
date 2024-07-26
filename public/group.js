@@ -1,5 +1,4 @@
 document.addEventListener('DOMContentLoaded', async () => {
-    // Retrieve token from localStorage
     const token = localStorage.getItem('token');
     
     if (!token) {
@@ -12,15 +11,17 @@ document.addEventListener('DOMContentLoaded', async () => {
     const groupchatForm = document.querySelector('.chatForm');
     const newGroup = document.querySelector('.newGroup');
     const showMessage = document.querySelector('.showMessage');
+    const sendBtn = document.querySelector('#sendBtn');
+    const messageInput = document.querySelector('#message');
+    const File = document.querySelector('#uploadFile');
 
-    // Add Group in Joined Section
     const addGroupInList = (groupObj) => {
+        joinedGroups.innerHTML = ''; // Clear the list before adding new groups
         groupObj.forEach(obj => {
             joinedGroups.innerHTML += `<div class="group-name" id="${obj.id}"><p>${obj.name}</p></div>`;
         });
     };
 
-    // Group details and message adder
     const groupManager = (groupObj) => {
         const groupName = document.querySelector('.groupName');
         const groupMembersCount = document.querySelector('.groupMembersCount');
@@ -40,7 +41,14 @@ document.addEventListener('DOMContentLoaded', async () => {
         groupchatForm.style.display = 'flex';
     };
 
-    // Open Group
+    const memberToMessageOpen = () => {
+        const members = document.querySelector('.members');
+        const showMessage = document.querySelector('.showMessage');
+        members.style.display = 'block';
+        showMessage.style.display = 'block';
+        console.log('memberToMessageOpen called');
+    };
+
     joinedGroups.addEventListener('click', async (e) => {
         if (e.target.classList.contains('group-name') || e.target.parentElement.classList.contains('group-name')) {
             try {
@@ -69,7 +77,6 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
     });
 
-    // Create new group
     if (createBtn) {
         createBtn.addEventListener('click', async (e) => {
             try {
@@ -119,22 +126,27 @@ document.addEventListener('DOMContentLoaded', async () => {
         console.error('Create button not found.');
     }
 
-    // Display joined groups and perform join operation if needed
+    // This code block should not be within another DOMContentLoaded listener
+
+
+
     try {
         const getJoinedGroups = await axios.get(`http://localhost:4000/group/joinedGroups`, {
             headers: { Authorization: `Bearer ${token}` }
         });
 
+        console.log('Joined Groups Data: ', getJoinedGroups.data);
+
         if (getJoinedGroups.data.length !== 0) {
             addGroupInList(getJoinedGroups.data);
         }
 
-        await joinFinish();
+        joinFinish();
     } catch (err) {
         console.error('Error Caught: ', err.response ? err.response.data : err.message);
     }
 
-    // Join operation
+    
     async function joinFinish() {
         try {
             if (localStorage.getItem('joinOp') === 'true') {
@@ -164,18 +176,63 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
     }
 
-    function groupLinkCopy() {
-        const copyText = document.getElementById("group-link").value;
 
-        const tempTextarea = document.createElement("textarea");
-        tempTextarea.value = copyText;
-        document.body.appendChild(tempTextarea);
 
-        tempTextarea.select();
-        document.execCommand("copy");
 
-        document.body.removeChild(tempTextarea);
+    async function getmsgs() {
+        const groupId = localStorage.getItem('groupId');
+        try {
+            const msgs = await axios.get(`http://localhost:4000/group/messages/${groupId}`, {
+                headers: { Authorization: `Bearer ${token}` }
+            });
 
-        alert("Group Link Copied: " + copyText);
+            if (msgs.data && msgs.data.length) {
+                msgs.data.forEach(msg => {
+                    showMessage.innerHTML += `<div class="message"><p>${msg.message}</p></div>`;
+                });
+            }
+        } catch (err) {
+            console.error('Error Caught: ', err.response ? err.response.data : err.message);
+        }
     }
+
+    groupchatForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        const groupId = localStorage.getItem('groupId');
+        const message = messageInput.value;
+        const files = uploadFile.files;
+
+        if (!message && files.length === 0) {
+            console.error('No message or files to send.');
+            return;
+        }
+
+        const formData = new FormData();
+        formData.append('message', message);
+        for (let file of files) {
+            formData.append('uploadFile', file);
+        }
+
+        try {
+            await axios.post(`http://localhost:4000/group/sendMessage/${groupId}`, formData, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                    'Content-Type': 'multipart/form-data'
+                }
+            });
+
+            // Clear input fields after sending the message
+            messageInput.value = '';
+            uploadFile.value = '';
+
+            // Fetch and display updated messages
+            showMessage.innerHTML = '';
+            getmsgs();
+        } catch (err) {
+            console.error('Error Caught: ', err.response ? err.response.data : err.message);
+        }
+    });
 });
+
+

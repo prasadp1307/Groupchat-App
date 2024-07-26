@@ -1,12 +1,12 @@
-const Sequelize = require('sequelize');
+const { Sequelize, DataTypes } = require('sequelize');
 const sequelize = require('../util/database');
 
-const Group = sequelize.define('group', {
+const Group = sequelize.define('Group', {
     id: {
         type: Sequelize.INTEGER,
         primaryKey: true,
-        allowNull: false,
-        autoIncrement: true
+        autoIncrement: true,
+        // allowNull: false
     },
     name: {
         type: Sequelize.STRING,
@@ -17,6 +17,10 @@ const Group = sequelize.define('group', {
         allowNull: false
     },
     memberCount: {
+        type: Sequelize.INTEGER,
+        defaultValue: 0
+    },
+    userId: {
         type: Sequelize.INTEGER,
         allowNull: false
     }

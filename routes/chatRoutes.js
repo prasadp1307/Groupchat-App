@@ -1,10 +1,12 @@
 const express = require('express');
 const router = express.Router();
-const auth = require('../middleware/authentication');
 const chatController = require('../controllers/chatController');
+const upload = require('../middleware/upload'); // Import the upload middleware
 
-router.post('/sendText', auth.authenticate, chatController.postTextMessage);
-router.get('/getText', auth.authenticate, chatController.getTextMessages);
+// Route to send message with file upload
+router.post('/sendMessage/:groupId', upload.array('files'), chatController.sendMessage);
 
+// Route to get messages
+router.get('/getMessages/:groupId', chatController.getMessages);
 
 module.exports = router;

@@ -1,27 +1,26 @@
-const Sequelize = require('sequelize');
+const { DataTypes } = require('sequelize');
 const sequelize = require('../util/database');
-const User = require('./users');
 
-
-const Message = sequelize.define('message', {
+const Message = sequelize.define('Message', {
     id: {
-        type: Sequelize.INTEGER,
-        primaryKey: true,
-        allowNull: false,
-        autoIncrement: true
+        type: DataTypes.INTEGER,
+        autoIncrement: true,
+        primaryKey: true
     },
     message: {
-        type: Sequelize.STRING,
+        type: DataTypes.STRING,
         allowNull: false
     },
     userId: {
-        type: Sequelize.INTEGER,
-        allowNull: false,
-        references: {
-            model: User,
-            key: 'id'
-        }
+        type: DataTypes.INTEGER,
+        allowNull: false
+    },
+    groupId: {
+        type: DataTypes.INTEGER,
+        allowNull: false
     }
+}, {
+    timestamps: true
 });
 
 module.exports = Message;

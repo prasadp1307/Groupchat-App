@@ -12,7 +12,7 @@ body{
 	justify-content: center;
 	min-height: 100vh;
 	background-image: url("./123.jpeg");
-	background-repeat: no-repeat;
+	background-repeat: repeat;
 	background-position: center;
 	background-size: cover;
 }
